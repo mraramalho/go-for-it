@@ -10,7 +10,7 @@ import (
 )
 
 type Deck struct {
-	Cards    [52]Card
+	Cards     [52]Card
 	CardCount int // Contador de cartas atuais no baralho
 }
 
@@ -46,7 +46,7 @@ func (d *Deck) Deal(handsize int) (Deck, error) {
 		return Deck{}, errors.New("not enough cards to deal")
 	}
 	hand := Deck{}
-	for i := range handsize{
+	for i := range handsize {
 		hand.AddCard(d.Cards[i])
 	}
 	copy(d.Cards[:], d.Cards[handsize:d.CardCount]) // Remove as cartas do baralho original
@@ -82,6 +82,13 @@ func NewDeck() Deck {
 		}
 	}
 	return d
+}
+
+func NewEmptyDeck() Deck {
+	return Deck{
+		Cards:     [52]Card{},
+		CardCount: 0,
+	}
 }
 
 // Lê um baralho de um arquivo

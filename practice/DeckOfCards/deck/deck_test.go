@@ -34,10 +34,7 @@ func TestAddCardToFullDeck(t *testing.T){
 }
 
 func TestAddCardToEmptyDeck(t *testing.T){
-	deck := Deck{
-		Cards: [52]Card{},
-		CardCount: 0,
-	}
+	deck := NewEmptyDeck()
 	card := Card{Value: "Ace", Suit: "Spades"}
 	if err := deck.AddCard(card); err != nil{
 		t.Error("Expected nil, got", err)
