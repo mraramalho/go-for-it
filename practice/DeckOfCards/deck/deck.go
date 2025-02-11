@@ -46,7 +46,7 @@ func (d *Deck) Deal(handsize int) (Deck, error) {
 		return Deck{}, errors.New("not enough cards to deal")
 	}
 	hand := Deck{}
-	for i := 0; i < handsize; i++ {
+	for i := range handsize{
 		hand.AddCard(d.Cards[i])
 	}
 	copy(d.Cards[:], d.Cards[handsize:d.CardCount]) // Remove as cartas do baralho original
@@ -56,7 +56,7 @@ func (d *Deck) Deal(handsize int) (Deck, error) {
 
 // Embaralha as cartas no baralho
 func (d *Deck) Shuffle() {
-	rand.Seed(time.Now().UnixNano())
+	rand.New(rand.NewSource(time.Now().UnixNano()))
 	for i := range d.Cards[:d.CardCount] {
 		j := rand.Intn(d.CardCount)
 		d.Cards[i], d.Cards[j] = d.Cards[j], d.Cards[i]
