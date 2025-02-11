@@ -81,6 +81,7 @@ func NewDeck() Deck {
 			d.AddCard(Card{Value: value, Suit: suit})
 		}
 	}
+	d.CardCount = 52
 	return d
 }
 
@@ -108,6 +109,16 @@ func ReadDeckFromFile(filepath string) (Deck, error) {
 			Value: strings.TrimSpace(cardParts[0]),
 			Suit:  strings.TrimSpace(cardParts[1]),
 		})
+	}
+	d.CardCount = len(d.Cards)
+	if d.CardCount > 52 {
+		return Deck{}, fmt.Errorf("too many cards in file: %s", filepath)
+	}
+	if d.CardCount <= 0 {
+		return Deck{}, fmt.Errorf("no cards in file: %s", filepath)
+	}
+	if d.CardCount < 52 {
+		return Deck{}, fmt.Errorf("not enough cards in file: %s", filepath)
 	}
 	return d, nil
 }
