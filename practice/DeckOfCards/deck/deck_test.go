@@ -70,5 +70,14 @@ func TestReadDeckFromFileError(t *testing.T) {
 	if err == nil {
 		t.Error("no cards in file: "+temp_dir+"temp_file.txt, got: ", err)
 	}
-	
+
+}
+
+func TestDeckShuffle(t *testing.T) {
+	d1, d2 := NewDeck(), NewDeck()
+	d1.Shuffle()
+	d2.Shuffle()
+	if d1.DeckToString() == d2.DeckToString() {
+		t.Error("Expectted different shuffled decks, got the same")
+	}
 }
